@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 import classes from './App.css';
 import Person from "./Person/Person";
 
@@ -49,12 +50,14 @@ class App extends Component {
       persons = (
         <div>
           {this.state.persons.map(person => {
-            return <Person
-              key={person.id}
-              click={this.deletePersonHandler}
-              name={person.name}
-              age={person.age}
-              changed={event => this.nameChangedHandler(event, person.id)} />
+            return <ErrorBoundary>
+              <Person
+                key={person.id}
+                click={this.deletePersonHandler}
+                name={person.name}
+                age={person.age}
+                changed={event => this.nameChangedHandler(event, person.id)} />
+            </ErrorBoundary>
           })}
         </div>
       );
@@ -72,15 +75,15 @@ class App extends Component {
     }
 
     return (
-      <div className={classes.App}>
-        <h1>Hi I'm a React app</h1>
-        <p className={appliedClasses.join(' ')}>This is really working</p>
-        <button
-          className={btnClass}
-          onClick ={this.togglePersonsHandler}>Toggle Persons
-        </button>
-        {persons}
-      </div>
+        <div className={classes.App}>
+          <h1>Hi I'm a React app</h1>
+          <p className={appliedClasses.join(' ')}>This is really working</p>
+          <button
+            className={btnClass}
+            onClick ={this.togglePersonsHandler}>Toggle Persons
+          </button>
+          {persons}
+        </div>
     );
   }
 }

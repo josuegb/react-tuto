@@ -4,17 +4,57 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
-  state = {
-    persons: [
-      { id: 'max1', name: 'Max', age: 28 },
-      { id: 'manu2', name: 'Manu', age: 29 },
-      { id: 'stephanie3', name: 'Stephanie', age: 26 }
-    ],
 
-    otherState: 'some other value',
+  constructor(props) {
+    super(props);
 
-    showPersons: false
+    this.state = {
+      persons: [
+        { id: 'max1', name: 'Max', age: 28 },
+        { id: 'manu2', name: 'Manu', age: 29 },
+        { id: 'stephanie3', name: 'Stephanie', age: 26 }
+      ],
+
+      showPersons: false
+    }
+    console.log('[App.js] Inside Constructor', props);
   }
+
+  componentWillMount() {
+    console.log('[App.js] Inside componentWillMount()');
+  }
+
+  componentDidMount() {
+    console.log('[App.js] Inside componentDidMount()')
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('[UPDATE App.js] Inside componentWillReceiveProps()', nextProps);
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[UPDATE App.js] Inside shouldComponentUpdate', nextProps, nextState);
+    return true;
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log('[UPDATE App.js] Inside componentWillUpdate', nextProps, nextState);
+  }
+
+  componentDidUpdate() {
+    console.log('[UPDATE App.js] Inside componentDidUpdate');
+  }
+
+  // state = {
+  //   persons: [
+  //     { id: 'max1', name: 'Max', age: 28 },
+  //     { id: 'manu2', name: 'Manu', age: 29 },
+  //     { id: 'stephanie3', name: 'Stephanie', age: 26 }
+  //   ],
+
+  //   otherState: 'some other value',
+
+  //   showPersons: false
+  // }
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
@@ -43,6 +83,9 @@ class App extends Component {
   }
 
   render() {
+
+    console.log('[App.js] Inside render()');
+
     let persons = null;
     if (this.state.showPersons) {
       persons = <Persons

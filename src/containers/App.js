@@ -26,6 +26,7 @@ class App extends PureComponent {
     console.log('[App.js] Inside Constructor', props);
   }
 
+  // Deprecated 16.3
   componentWillMount() {
     console.log('[App.js] Inside componentWillMount()');
   }
@@ -34,6 +35,7 @@ class App extends PureComponent {
     console.log('[App.js] Inside componentDidMount()')
   }
 
+  // Deprecated 16.3
   componentWillReceiveProps(nextProps) {
     console.log('[UPDATE App.js] Inside componentWillReceiveProps()', nextProps);
   }
@@ -43,8 +45,19 @@ class App extends PureComponent {
   //   nextState.showPersons !== this.state.showPersons;
   // }
 
+  // Deprecated 16.3
   componentWillUpdate(nextProps, nextState) {
     console.log('[UPDATE App.js] Inside componentWillUpdate', nextProps, nextState);
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log('[UPDATE App.js] Inside getDrivedStateFromProps', nextProps, prevState);
+
+    return prevState;
+  }
+
+  getSnapshotBeforeUpdate() {
+    console.log('[UPDATE App.js] Inside getSnapshotBeforeUpdate');
   }
 
   componentDidUpdate() {

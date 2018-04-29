@@ -5,6 +5,9 @@ import Person from './Person/Person';
 class Persons extends PureComponent {
   constructor(props) {
     super(props);
+
+    this.lastPerson = React.createRef();
+
     console.log('[Persons.js] Inside Constructor', props);
   }
 
@@ -14,6 +17,8 @@ class Persons extends PureComponent {
 
   componentDidMount() {
     console.log('[Persons.js] Inside componentDidMount()');
+
+    this.lastPerson.current.focus();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -40,6 +45,7 @@ class Persons extends PureComponent {
     return this.props.persons.map((person, index) => {
       return <Person
         key={person.id}
+        ref={this.lastPerson}
         position={index}
         click={() => this.props.clicked(index)}
         name={person.name}
